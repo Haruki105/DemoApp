@@ -3,6 +3,8 @@ package com.example.demo;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +40,76 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         edit_email = findViewById(R.id.edit_email);
+        edit_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                notification  = new TextView(MainActivity.this);
+                notification.setTextColor(Color.RED);
+                notification.setTextSize(15);
+                if (edit_email.getText().toString().isEmpty() || edit_password.getText().toString().isEmpty())
+                {
+                    layout.removeAllViews();
+                    notification.setText("Please fill in information!");
+                    layout.addView(notification);
+                }
+                else {
+                    if (!isValidEmail(edit_email.getText().toString())) {
+                        layout.removeAllViews();
+                        notification.setText("Email is invalid!");
+                        layout.addView(notification);
+                    } else
+                    {
+                        layout.removeAllViews();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         edit_password = findViewById(R.id.edit_password);
+
+        edit_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                notification  = new TextView(MainActivity.this);
+                notification.setTextColor(Color.RED);
+                notification.setTextSize(15);
+                if (edit_email.getText().toString().isEmpty() || edit_password.getText().toString().isEmpty())
+                {
+                    layout.removeAllViews();
+                    notification.setText("Please fill in information!");
+                    layout.addView(notification);
+                }
+                else {
+                    if (!isValidEmail(edit_email.getText().toString())) {
+                        layout.removeAllViews();
+                        notification.setText("Email is invalid!");
+                        layout.addView(notification);
+                    } else
+                    {
+                        layout.removeAllViews();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         layout = findViewById(R.id.layout_notification);
         bt_signin = findViewById(R.id.button);
 
