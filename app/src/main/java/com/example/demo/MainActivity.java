@@ -39,99 +39,32 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        notification = findViewById(R.id.tv_notification);
+        notification.setVisibility(View.GONE);
         edit_email = findViewById(R.id.edit_email);
-        edit_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//        edit_email.addTextChangedListener(new TextWatcher() {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notification  = new TextView(MainActivity.this);
-                notification.setTextColor(Color.RED);
-                notification.setTextSize(15);
-                if (edit_email.getText().toString().isEmpty() || edit_password.getText().toString().isEmpty())
-                {
-                    layout.removeAllViews();
-                    notification.setText("Please fill in information!");
-                    layout.addView(notification);
-                }
-                else {
-                    if (!isValidEmail(edit_email.getText().toString())) {
-                        layout.removeAllViews();
-                        notification.setText("Email is invalid!");
-                        layout.addView(notification);
-                    } else
-                    {
-                        layout.removeAllViews();
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         edit_password = findViewById(R.id.edit_password);
 
-        edit_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                notification  = new TextView(MainActivity.this);
-                notification.setTextColor(Color.RED);
-                notification.setTextSize(15);
-                if (edit_email.getText().toString().isEmpty() || edit_password.getText().toString().isEmpty())
-                {
-                    layout.removeAllViews();
-                    notification.setText("Please fill in information!");
-                    layout.addView(notification);
-                }
-                else {
-                    if (!isValidEmail(edit_email.getText().toString())) {
-                        layout.removeAllViews();
-                        notification.setText("Email is invalid!");
-                        layout.addView(notification);
-                    } else
-                    {
-                        layout.removeAllViews();
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         layout = findViewById(R.id.layout_notification);
         bt_signin = findViewById(R.id.button);
 
         bt_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notification  = new TextView(MainActivity.this);
-                notification.setTextColor(Color.RED);
-                notification.setTextSize(15);
                 if (edit_email.getText().toString().isEmpty() || edit_password.getText().toString().isEmpty())
                 {
-                    layout.removeAllViews();
+
                     notification.setText("Please fill in information!");
-                    layout.addView(notification);
+                    notification.setVisibility(View.VISIBLE);
                 }
                 else
                 {
                     if (!isValidEmail(edit_email.getText().toString()))
                     {
-                        layout.removeAllViews();
+
                         notification.setText("Email is invalid!");
-                        layout.addView(notification);
+                        notification.setVisibility(View.VISIBLE);
                     }
                     else
                     {
@@ -141,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
                         if (isExisted) {
                             //Toast.makeText(MainActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                            layout.removeAllViews();
-                            notification.setText("Sign in successfully");
-                            layout.addView(notification);
+
+                            notification.setText("Sign in successfully!");
+                            notification.setVisibility(View.VISIBLE);
                         } else
                         {
                             //Toast.makeText(MainActivity.this, "Người dùng không tồn tại!", Toast.LENGTH_SHORT).show();
-                            layout.removeAllViews();
+
                             notification.setText("User doesn't exist.");
-                            layout.addView(notification);
+                            notification.setVisibility(View.VISIBLE);
                         }
                     }
                 }

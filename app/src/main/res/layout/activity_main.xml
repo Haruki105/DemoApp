@@ -61,7 +61,13 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:id="@+id/layout_notification">
-
+        <TextView
+            android:id="@+id/tv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff0000"
+            android:textSize="15sp"
+            />
     </LinearLayout>
 
     <Button
