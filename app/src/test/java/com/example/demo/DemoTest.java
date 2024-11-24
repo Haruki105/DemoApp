@@ -1,17 +1,12 @@
 package com.example.demo;
 import static org.junit.Assert.assertEquals;
-
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.errorprone.annotations.Var;
 import io.appium.java_client.AppiumDriver;
-//import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.options.BaseOptions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.By;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,15 +17,11 @@ public class DemoTest {
     public void setUp() throws MalformedURLException {
 
         BaseOptions options = new BaseOptions(); // Khởi tạo BaseOptions
-        options.setCapability("platformName", "Android");
-        options.setCapability("appium:platformVersion", "14.0");
-        options.setCapability("deviceName", "Pixel 8a API 34");
-        options.setCapability("appium:automationName", "UiAutomator2");
+        options.setCapability("platformName", "Android");//nền tảng
+        options.setCapability("appium:platformVersion", "14.0");//phiên bản nền tảng
+        options.setCapability("deviceName", "Pixel 8a API 34");//tên thiết bị
+        options.setCapability("appium:automationName", "UiAutomator2");//framework test
         options.setCapability("app", "D:\\Nam3\\KiemChungPhanMem\\demo\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
-        options.setCapability("appium:ensureWebviewsHavePages", true);
-        options.setCapability("appium:nativeWebScreenshot", true);
-        options.setCapability("appium:newCommandTimeout", 3600);
-        options.setCapability("appium:connectHardwareKeyboard", true);
 
         // Khởi tạo AndroidDriver với Appium Server
         driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), options);
@@ -74,6 +65,16 @@ public class DemoTest {
         driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"com.example.demo:id/button\"]")).click();
         String errorMsg = driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"com.example.demo:id/tv_notification\"]")).getText();
         assertEquals("Sign in successfully!", errorMsg.trim());
+    }
+
+    //Test5: Trường hợp sai mong muốn
+    @Test
+    public void Test5() {
+        driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"com.example.demo:id/edit_email\"]")).sendKeys("user1@gmail.com");
+        driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"com.example.demo:id/edit_password\"]")).sendKeys("12345");
+        driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"com.example.demo:id/button\"]")).click();
+        String errorMsg = driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"com.example.demo:id/tv_notification\"]")).getText();
+        assertEquals("User doesn't exist.", errorMsg.trim());
     }
 
     @After
